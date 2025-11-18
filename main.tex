@@ -1,0 +1,58 @@
+\documentclass[10.5pt]{article}
+
+% --- Page setup ---
+\usepackage[margin=0.65in]{geometry}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\renewcommand{\familydefault}{\sfdefault}
+\setlist[itemize]{left=1em,itemsep=0.15em,topsep=0.15em}
+\linespread{0.97}
+\pagenumbering{gobble} % remove page number
+
+% --- Compact sections ---
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{0pt}{-5pt plus -2pt minus -2pt}{3pt plus 1pt minus 1pt}{\large\bfseries}}
+\makeatother
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Project Progress Report}}\\[2pt]
+\textbf{Course/Team:} Mobile Price Classification \quad
+\textbf{Project Lead:} \emph{Joe Jimenez}\\
+\textbf{Team Members:} Joe Jimenez (Lead), Alvin Sun, Person 3, Person 4, Person 5
+\end{center}
+\vspace{0.25em}\hrule\vspace{0.5em}
+
+\section{Project Title, Description, and Goals}
+\textbf{Title:} \emph{Predicting Smartphone Price Range Using Machine Learning.}\\[2pt]
+This project uses the Kaggle \emph{Mobile Price Classification} dataset, which contains smartphone hardware specifications such as RAM, battery power, pixel resolution, and connectivity options, to predict the price range category of a mobile device (0–3). Our goal is to build a robust and interpretable machine learning pipeline capable of classifying phones into these four price categories using only their technical features. The workflow includes comprehensive exploratory data analysis (EDA), feature engineering, model training, and evaluation. We perform correlation analysis, generate derived features such as pixel area and screen size, and apply multiple supervised learning algorithms to identify which features most influence pricing. Random Forest and Gradient Boosting models are used with stratified 5-fold cross-validation to ensure balanced accuracy and reproducibility. The final deliverables include a cleaned dataset, feature importance visualizations, a tuned predictive model, and a documented pipeline ready for Kaggle submission and team reproducibility.
+
+\section{Responsibilities of Each Team Member}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\textbf{Project Lead (Joe Jimenez)} & Oversees all project stages, created the GitHub repository (\href{https://github.com/joejimenez-lab/Mobile_Price_Classification}{Mobile\_Price\_Classification}) and Colab notebook (\href{https://colab.research.google.com/drive/1fzS9o1V2wziUjAmq797BvXZ-lq1tD6t5?usp=sharing}{Google~Colab~Link}), authored starter code, implemented data validation, EDA, feature engineering, and cross-validation setup, and manages merges, code quality, and documentation.\\
+\textbf{Person 2} & Handles data preprocessing, path setup, and schema checks for Kaggle and Colab environments. Maintains environment configuration, \texttt{README}, and \texttt{requirements.txt}.\\
+\textbf{Person 3} & Leads exploratory analysis by computing descriptive statistics, visualizing class distributions and correlations, and preparing EDA figures and summary insights.\\
+\textbf{Person 4} & Implements feature engineering logic, generates derived features (\texttt{px\_area}, \texttt{screen\_size}), and removes redundant columns (\texttt{blue}, \texttt{dual\_sim}, \texttt{talk\_time}, \texttt{m\_dep}, raw \texttt{px\_*}, \texttt{sc\_*}).\\
+\textbf{Person 5} & Focuses on modeling by training and comparing RandomForest and GradientBoosting models, performing 5-fold stratified CV, and producing confusion matrices, accuracy metrics, and feature importance visualizations.\\
+\end{tabularx}
+
+\section{Information About the Data}
+\begin{itemize}
+    \item \textbf{Source:} Kaggle dataset “Mobile Price Classification.”
+    \item \textbf{Size:} 2,000 training rows and 1,000 test rows.
+    \item \textbf{Columns:} 21 total (20 predictive features and 1 target column \texttt{price\_range}).
+    \item \textbf{Target:} Ordinal classes 0–3 representing increasing price levels.
+    \item \textbf{Key features:} \texttt{ram}, \texttt{battery\_power}, \texttt{clock\_speed}, \texttt{n\_cores}, \texttt{int\_memory}, \texttt{px\_height}, \texttt{px\_width}, \texttt{pc}, \texttt{fc}, \texttt{sc\_h}, \texttt{sc\_w}, and connectivity indicators (\texttt{four\_g}, \texttt{three\_g}, \texttt{wifi}, \texttt{touch\_screen}).
+    \item \textbf{Preprocessing:} Verified no missing values, engineered new variables (\texttt{px\_area} = \texttt{px\_height} × \texttt{px\_width}, \texttt{screen\_size} = \texttt{sc\_h} × \texttt{sc\_w}), removed low-impact columns, and used stratified cross-validation to maintain balanced class distribution.
+\end{itemize}
+
+\section{Project Status and Progress So Far}
+The team has finished data exploration, feature creation, and model development using Google Colab and GitHub for collaboration. Our analysis confirmed that \texttt{ram} and \texttt{battery\_power} are the strongest indicators of phone pricing, while features like screen size and pixel density also contribute meaningfully. The pipeline has been fully automated to clean data, train models, and generate predictions, ensuring that every run produces consistent and reproducible results.  
+
+Two baseline models, RandomForest and GradientBoosting, were trained and tested using 5-fold stratified cross-validation, achieving about 90–92\% accuracy overall. These models generalize well across all four price categories, correctly identifying both low-end and premium devices. The next phase will involve hyperparameter tuning with GridSearchCV, testing more advanced models such as XGBoost and LightGBM, and performing per-class error analysis to understand where misclassifications occur.  
+
+Finally, the team plans to add a model interpretation section using SHAP to visualize which features most affect price predictions, build a Kaggle-ready inference script, and document results through a short model card that summarizes performance, limitations, and recommendations for deployment.
+
+\end{document}
